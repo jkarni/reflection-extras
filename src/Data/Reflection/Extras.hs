@@ -19,7 +19,7 @@ module Data.Reflection.Extras
    , usingT
    , reifyInstance
    , with
-   , Lift
+   , Lift(..)
    , ReifiableConstraint (..)
    , Reifies (..)
    , Def (..)
