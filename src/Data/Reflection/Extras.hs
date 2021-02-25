@@ -389,8 +389,11 @@ instance ReifiableConstraint Monoid where
   data Def Monoid a = Monoid { mappend_ :: a -> a -> a, mempty_ :: a }
   reifiedIns = Sub Dict
 
+instance Reifies s (Def Monoid a) => Semigroup (Lift Monoid s a) where
+  (<>) = liftA2 (mappend_ REFLECT)
+
 instance Reifies s (Def Monoid a) => Monoid (Lift Monoid s a) where
-  mappend = liftA2 (mappend_ REFLECT)
+  mappend = (<>)
   mempty  = pure $ mempty_ REFLECT
 
 -- Aeson Instances
